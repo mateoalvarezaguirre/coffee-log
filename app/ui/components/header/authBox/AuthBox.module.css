@@ -1,0 +1,19 @@
+.authBox {
+
+    .login {
+        background-color: #361601;
+        color: #e0ceb6;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        border: #e0ceb6 solid 1px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+
+    .login:hover {
+        background-color: #e0ceb6;
+        color: #361601;
+        border: #361601 solid 1px;
+    }
+}

@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e0ceb6;
+
+    .link {
+        text-decoration: none;
+        color: #361601;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #361601;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .pages {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        border: #361601 solid 1px;
+        padding: .8rem 1rem;
+        border-radius: 2rem;
+    }
+
+    .profile {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        .image {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+}

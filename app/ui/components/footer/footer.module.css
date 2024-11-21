@@ -1,0 +1,28 @@
+.container {
+    background-color: #171717;
+    color: #e0ceb6;
+    min-height: 300px;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+
+    .blogName {
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 1rem;
+        text-align: center;
+        height: 270px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .rights {
+        border-top: #e0ceb6 solid 1px;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
