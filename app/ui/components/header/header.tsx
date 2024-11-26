@@ -8,6 +8,7 @@ import NavLinks from './navlinks/navlinks';
 import { useAppSelector, useAppDispatch } from '@/app/store/store';
 import AuthBox from './authBox/AuthBox';
 import { getUser } from '@/app/store/slices/auth/authSlice';
+import ProfileBox from "@/app/ui/components/header/profileBox/ProfileBox";
 
 const Header = () => {
     const { loading, user } = useAppSelector((state) => state.auth);
@@ -27,6 +28,7 @@ const Header = () => {
                     <Image
                         src="/logo.png"
                         alt="logo"
+                        priority={true}
                         width={75}
                         height={75}
                     />
@@ -38,7 +40,7 @@ const Header = () => {
             </div>
             {loading && <p>Loading...</p>}
             {user && (
-                <div className={styles.profile} >
+                /*<div className={styles.profile} >
                     <Image
                         src={user.photoURL ?? '/profile.png'}
                         alt="profile"
@@ -47,7 +49,8 @@ const Header = () => {
                         className={styles.profileImage}
                     />
                     <p className={styles.profileName} >{user.displayName}</p>
-                </div>
+                </div>*/
+                <ProfileBox />
             )}
             {!user && (<AuthBox />)}
         </div>

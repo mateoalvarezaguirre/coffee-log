@@ -11,7 +11,7 @@ const AuthBox: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className={styles.login}
             >
-                Sign In
+                Ingresar
             </button>
             <div
                 className={`absolute top-0 right-0 z-10 mt-12 w-[300px] rounded-md shadow-lg transition transform ${

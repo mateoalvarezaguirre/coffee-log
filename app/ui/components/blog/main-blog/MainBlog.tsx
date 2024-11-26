@@ -1,30 +1,26 @@
 import React from 'react'
-import background from '@/public/blogs/latte-art.webp';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Blog } from '@/app/interfaces/Blog/Blog';
+import {getMainBlog} from "@/app/services/blogs/BlogApi";
 
-const MainBlog = () => {
+const MainBlog = async () => {
 
-    const blog: Blog = {
-        title: 'El Arte en Cada Taza: Guía Completa de Latte Art para Principiantes',
-        subtitle: 'Aprende los fundamentos, técnicas y secretos del latte art para crear diseños impresionantes en tu café.',
-        slug: 'el-arte-en-cada-taza-guia-completa-de-latte-art-para-principiantes',
-        category: 'Latte Art',
-        categorySlug: 'latte-art',
-        date: '2021-09-01',
-        readingTime: '5 min',
-        content: 'Aprende los fundamentos, técnicas y secretos del latte art para crear diseños impresionantes en tu café. El latte art es una forma de arte que se ha vuelto muy popular en los últimos años. Se trata de crear diseños en la superficie de un café con leche, utilizando la crema de la leche como lienzo. En este artículo, te enseñaremos los fundamentos del latte art, las técnicas básicas que necesitas saber y algunos secretos para crear diseños impresionantes en tu café. ¡Vamos a empezar!'
-    }
+    /*await new Promise((resolve) => {
+        setTimeout(resolve, 1000000);
+    });*/
+
+    const blog: Blog | null = await getMainBlog();
+
+    if (!blog) return null;
 
     return (
         <article className="flex flex-col items-start justify-end relative h-[60vh] sm:h-[85vh]"><div className="absolute top-0 left-0 bottom-0 right-0 h-full bg-gradient-to-b from-transparent from-0% to-dark/90 rounded-3xl z-0 w-full"></div>
             <Image
-                src={background}
+                src={`/blogs/${blog.image}`}
                 alt="Latter art"
-                layout="fill"
-                objectFit="cover"
-                className="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent rounded-[1rem]"
+                fill
+                className="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent rounded-[1rem] object-cover"
             />
             <div className="w-full lg:w-3/4 p-6 sm:p-8 md:p-12  lg:p-16 flex flex-col items-start justify-center z-0 text-white">
                 <Link

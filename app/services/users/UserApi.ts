@@ -1,12 +1,6 @@
-import { User } from "@/app/interfaces/User/User";
-import {
-    addDoc, collection, doc, getDocs,
-    limit,
-    orderBy,
-    query, updateDoc, where
-} from "firebase/firestore";
-import { db } from "@/app/firebase/firebaseConfig";
-import { create } from "domain";
+import {User} from "@/app/interfaces/User/User";
+import {addDoc, collection, doc, getDocs, limit, orderBy, query, updateDoc, where} from "firebase/firestore";
+import {db} from "@/app/firebase/firebaseConfig";
 
 export const getUser = async (
     uid: string | undefined
@@ -106,16 +100,31 @@ export const getAllUsers = async (): Promise<User[]> => {
         );
 
         const res = await getDocs(usersCollection);
-        const users = res.docs.map((c) => ({
+
+        return res.docs.map((c) => ({
             uid: c.data().uid,
             email: c.data().email,
             displayName: c.data().displayName,
             photoURL: c.data().photoURL,
             scopes: c.data().scopes,
         }));
-        return users;
     } catch (error) {
         console.error(error);
         return [];
+    }
+}
+
+export const getTotalUsers = async (): Promise<number> => {
+    try {
+        const usersCollection = query(
+            collection(db, "users")
+        );
+
+        const res = await getDocs(usersCollection);
+
+        return res.size;
+    } catch (error) {
+        console.error(error);
+        return 0;
     }
 }

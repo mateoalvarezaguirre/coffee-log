@@ -7,8 +7,8 @@ const GoogleAuth: React.FC = () => {
     const dispatch = useAppDispatch();
     const { loading, error } = useAppSelector((state: RootState) => state.auth);
 
-    const handleGoogleLogin = () => {
-        dispatch(authWithGoogle());
+    const handleGoogleLogin = async () => {
+        await dispatch(authWithGoogle());
     };
 
     return (
@@ -27,7 +27,7 @@ const GoogleAuth: React.FC = () => {
                             <path fill="#34A853" d="M24 47c5.9 0 10.8-1.9 14.4-5.2l-7.1-5.5c-2 1.4-4.5 2.3-7.3 2.3-5.9 0-10.9-4-12.7-9.4l-7.1 5.5C7.1 41.1 14.7 47 24 47z" />
                             <path fill="none" d="M0 0h48v48H0z" />
                         </svg>)}
-                    {!error &&(loading ? 'Signing in with Google...' : 'Sign in with Google')}
+                    {!error &&(loading ? 'Ingresando con tu cuenta de Google...' : 'Ingresa con tu cuenta de Google')}
 
                     {error && <p style={{ color: 'red' }}>{error}</p>}
                 </button>

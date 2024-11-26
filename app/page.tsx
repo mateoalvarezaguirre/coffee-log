@@ -1,5 +1,5 @@
-import MainBlog from "@/app/ui/components/blog/main-blog/MainBlog";
 import AppLayout from "./ui/components/layout/AppLayout";
+import {Home as HomeComponent} from "@/app/ui/components/home/Home";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         padding: 0,
         margin: 0,
       }}>
-        <MainBlog />
+        <HomeComponent />
       </main>
     </AppLayout>
   );
