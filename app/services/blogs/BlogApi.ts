@@ -3,6 +3,7 @@ import { db } from "@/app/firebase/firebaseConfig";
 import {Blog} from "@/app/interfaces/Blog/Blog";
 import {formatTimestamp} from "@/app/utils/DateHelper";
 import {DocumentData, QueryDocumentSnapshot} from "@firebase/firestore";
+import {Category} from "@/app/interfaces/Blog/Category";
 
 const mapBlogData = (doc: QueryDocumentSnapshot<DocumentData, DocumentData>): Blog => ({
     uid: doc.id,
@@ -179,10 +180,13 @@ export const getAllCategories = async () => {
         );
 
         const res = await getDocs(blogCollection);
-        const categoryArray = new Array<string>()
+        const categoryArray = new Array<Category>()
 
         res.docs.forEach((doc) => {
-            const category = doc.data().category;
+            const category = {
+                name: doc.data().category,
+                slug: doc.data().categorySlug,
+            };
             if (!categoryArray.includes(category)) {
                 categoryArray.push(category);
             }
