@@ -1,8 +1,9 @@
 'use client';
 
 import { Button } from '@/app/ui/components/dashboard/button';
+import {Category} from "@/app/interfaces/Blog/Category";
 
-export default function Form({ categories }: { categories: string[] }) {
+export default function Form({ categories }: { categories: Category[] }) {
 
   return (
       <form action="/create-blog">
@@ -65,8 +66,8 @@ export default function Form({ categories }: { categories: string[] }) {
                 Select Category
               </option>
                 {categories.map((category, index) => (
-                    <option key={index} value={category}>
-                        {category}
+                    <option key={index} value={category.slug}>
+                        {category.name}
                     </option>
                 ))}
             </select>

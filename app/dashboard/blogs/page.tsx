@@ -2,7 +2,7 @@ import Pagination from '@/app/ui/components/dashboard/blogs/pagination';
 import Search from '@/app/ui/components/dashboard/search';
 import BlogTable from '@/app/ui/components/dashboard/blogs/table';
 import { CreateBlog } from '@/app/ui/components/dashboard/blogs/buttons';
-import { InvoicesTableSkeleton } from '@/app/ui/components/dashboard/skeletons';
+import { BlogsTableSkeleton } from '@/app/ui/components/dashboard/skeletons';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import {fetchBlogPages} from "@/app/services/blogs/BlogApi";
@@ -36,7 +36,7 @@ export default async function Page({ searchParams }: BlogPageProps) {
                 <Search placeholder="Buscar blogs..." />
                 <CreateBlog />
             </div>
-            <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+            <Suspense key={query + currentPage} fallback={<BlogsTableSkeleton />}>
                 <BlogTable query={query} currentPage={+currentPage} />
             </Suspense>
             <div className="mt-5 flex w-full justify-center">

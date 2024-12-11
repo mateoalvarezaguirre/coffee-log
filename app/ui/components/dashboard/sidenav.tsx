@@ -20,10 +20,10 @@ export default function SideNav() {
   return (
     <div className="flex h-full flex-col px-3 py-4 md:px-2 rounded-xl box-border">
       <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-40"
+        className="mb-2 flex h-20 items-end justify-start rounded-md p-4 md:h-40 bg-gray-50"
         href="/"
       >
-        <div className="bg-gray-50 rounded-lg w-full h-auto flex gap-2 items-center">
+        <div className=" rounded-lg w-full h-auto flex gap-2 items-center">
             <Image
                 src="/logo.png"
                 alt="logo"
@@ -40,7 +40,7 @@ export default function SideNav() {
         <NavLinks />
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <div onClick={handleLogout}>
-          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-opacity-50 md:flex-none md:justify-start md:p-2 md:px-3">
             <PowerIcon className="w-6" />
             <div className="hidden md:block">Logout</div>
           </button>

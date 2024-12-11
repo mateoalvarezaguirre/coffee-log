@@ -1,3 +1,5 @@
+import { BlogContent } from "./BlogContent";
+
 export interface Blog {
     uid: string;
     title: string;
@@ -8,6 +10,6 @@ export interface Blog {
     categorySlug: string;
     date: string;
     readingTime: string;
-    content: string;
+    content: BlogContent[];
     status: string;
 }

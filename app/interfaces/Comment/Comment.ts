@@ -1,10 +1,12 @@
 export interface Comment {
-    uid: string,
+    uid?: string,
     blogId: string,
     content: string,
     userId: string,
     date: string,
     totalLikes: number,
-    userImage: string | null,
-    userName: string | null,
+    likes?: string[],
+    belongsToCommentUid?: string,
+    userImage?: string | null,
+    userName?: string | null
 }

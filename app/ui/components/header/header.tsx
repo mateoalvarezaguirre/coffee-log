@@ -11,7 +11,7 @@ import { getUser } from '@/app/store/slices/auth/authSlice';
 import ProfileBox from "@/app/ui/components/header/profileBox/ProfileBox";
 
 const Header = () => {
-    const { loading, user } = useAppSelector((state) => state.auth);
+    const { user } = useAppSelector((state) => state.auth);
 
     const dispatch = useAppDispatch();
 
@@ -38,18 +38,7 @@ const Header = () => {
             <div className={styles.pages}>
                 <NavLinks />
             </div>
-            {loading && <p>Loading...</p>}
             {user && (
-                /*<div className={styles.profile} >
-                    <Image
-                        src={user.photoURL ?? '/profile.png'}
-                        alt="profile"
-                        width={50}
-                        height={50}
-                        className={styles.profileImage}
-                    />
-                    <p className={styles.profileName} >{user.displayName}</p>
-                </div>*/
                 <ProfileBox />
             )}
             {!user && (<AuthBox />)}

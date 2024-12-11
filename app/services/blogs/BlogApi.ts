@@ -4,6 +4,7 @@ import {Blog} from "@/app/interfaces/Blog/Blog";
 import {formatTimestamp} from "@/app/utils/DateHelper";
 import {DocumentData, QueryDocumentSnapshot} from "@firebase/firestore";
 import {Category} from "@/app/interfaces/Blog/Category";
+import { BlogContent } from "@/app/interfaces/Blog/BlogContent";
 
 const mapBlogData = (doc: QueryDocumentSnapshot<DocumentData, DocumentData>): Blog => ({
     uid: doc.id,
@@ -15,9 +16,27 @@ const mapBlogData = (doc: QueryDocumentSnapshot<DocumentData, DocumentData>): Bl
     categorySlug: doc.data().categorySlug,
     date: formatTimestamp(doc.data().createdAt),
     readingTime: doc.data().readingTime,
-    content: doc.data().content,
+    content: mapBlogContent(doc.data().content),
     status: doc.data().status,
 });
+
+const mapBlogContent = (content: string): BlogContent[] => {
+    try {
+        const contentArray = JSON.parse(content);
+
+        return contentArray.map((content: { title: string, content: string }) => ({
+            title: content.title,
+            content: content.content,
+        }));
+    } catch {
+        return [
+            {
+                title: "",
+                content: content,
+            }
+        ]
+    }
+}
 
 export const getMainBlog = async () => {
     try {
@@ -119,7 +138,14 @@ export const updateBlog = async (blog: Blog) => {
     try {
         const blogRef = doc(db, "blogs", blog.uid);
         await updateDoc(blogRef, {
-            ...blog,
+            title: blog.title,
+            subtitle: blog.subtitle,
+            image: blog.image,
+            slug: blog.slug,
+            category: blog.category,
+            categorySlug: blog.categorySlug,
+            readingTime: blog.readingTime,
+            content: JSON.stringify(blog.content),
             updatedAt: new Date(),
         });
     } catch (error) {

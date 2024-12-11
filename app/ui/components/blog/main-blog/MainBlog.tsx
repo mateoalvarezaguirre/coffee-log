@@ -17,7 +17,7 @@ const MainBlog = async () => {
     return (
         <article className="flex flex-col items-start justify-end relative h-[60vh] sm:h-[85vh]"><div className="absolute top-0 left-0 bottom-0 right-0 h-full bg-gradient-to-b from-transparent from-0% to-dark/90 rounded-3xl z-0 w-full"></div>
             <Image
-                src={`/blogs/${blog.image}`}
+                src={`https://firebasestorage.googleapis.com/v0/b/blog-coffee-log.firebasestorage.app/o/blogs%2Flatte-art.webp?alt=media&token=9a83d969-ed56-425a-a61c-b9ccccbcd5f1`}
                 alt="Latter art"
                 fill
                 className="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent rounded-[1rem] object-cover"

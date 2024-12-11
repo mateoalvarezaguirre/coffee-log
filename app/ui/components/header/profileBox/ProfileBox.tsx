@@ -33,7 +33,7 @@ const ProfileBox: React.FC = () => {
             <div onClick={toggleProfile}>
                 <Image
                     className={`rounded-full cursor-pointer`}
-                    src={user.photoURL ?? '/profile.png'}
+                    src={user.photoURL ?? '/profile.webp'}
                     alt="profile"
                     width={50}
                     height={50}
