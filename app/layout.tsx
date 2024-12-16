@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "@/app/ui/styles/globals.css";
 import { RobotoMono } from "@/app/ui/fonts/fonts";
-import Providers from "./store/Providers";
+import Providers from "@/app/store/Providers";
+import { AuthProvider } from "@/app/context/AuthContext";
 
 export const metadata: Metadata = {
   title: {
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${RobotoMono} antialiased`}
+        className={`${RobotoMono.className} antialiased`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <AuthProvider>
+          <Providers>
+            {children}
+          </Providers>
+        </AuthProvider>
       </body>
     </html>
   );

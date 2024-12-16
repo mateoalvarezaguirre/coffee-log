@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from "@/app/store/store";
 import {PowerIcon, UserCircleIcon} from "@heroicons/react/24/outline";
-import {logout} from "@/app/store/slices/auth/authSlice";
+import {logout as sliceLogout} from "@/app/store/slices/auth/authSlice";
 import {redirect} from "next/navigation";
 import Link from "next/link";
+import { useAuth } from '@/app/context/AuthContext';
 
 const ProfileBox: React.FC = () => {
 
@@ -13,12 +14,15 @@ const ProfileBox: React.FC = () => {
 
     const { user } = useAppSelector((state) => state.auth);
 
+    const { logout } = useAuth();
+
     if (!user) {
         return null;
     }
 
-    const handleLogout = () => {
-        dispatch(logout());
+    const handleLogout = async () => {
+        await logout();
+        dispatch(sliceLogout());
 
         redirect('/');
     }

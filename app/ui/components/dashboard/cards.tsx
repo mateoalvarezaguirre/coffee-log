@@ -4,14 +4,15 @@ import {
   UserGroupIcon,
   DocumentTextIcon,
 } from '@heroicons/react/24/outline';
-import {getTotalUsers} from "@/app/services/users/UserApi";
-import {getTotalBlogs} from "@/app/services/blogs/BlogApi";
+import { getTotalUsers } from "@/app/services/users/UserApi";
+import { getTotalBlogs } from "@/app/services/blogs/BlogApi";
+import { getTotalComments } from '@/app/services/comment/CommentApi';
 
 const iconMap = {
   views: ChartBarIcon,
   users: UserGroupIcon,
   comments: ChatBubbleLeftRightIcon,
-    blogs: DocumentTextIcon,
+  blogs: DocumentTextIcon,
 };
 
 export default async function CardWrapper() {
@@ -20,11 +21,11 @@ export default async function CardWrapper() {
     numberOfUsers,
     totalVisits,
     totalComments,
-  } =  {
-      numberOfBlogs: await getTotalBlogs(),
-      numberOfUsers: await getTotalUsers(),
-      totalVisits: 10000,
-      totalComments: 3.500,
+  } = {
+    numberOfBlogs: await getTotalBlogs(),
+    numberOfUsers: await getTotalUsers(),
+    totalVisits: 10000,
+    totalComments: await getTotalComments(),
   };
 
   return (

@@ -2,7 +2,7 @@ import { AuthState } from "@/app/interfaces/Auth/Auth";
 import { User } from "@/app/interfaces/User/User";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch } from "@/app/store/store";
-import { loginWithGoogle } from "./authActions";
+import { loginWithGoogle } from '@/app/store/slices/auth/authActions';
 
 interface exception {
 	message: string;
@@ -35,6 +35,11 @@ export const authSlice = createSlice({
 			state.loading = false;
 			state.error = null;
 		},
+		setUser: (state, action: PayloadAction<User>) => {
+			state.user = action.payload;
+			state.loading = false;
+			state.error = null;
+		},
 		loginFailure: (state, action: PayloadAction<string>) => {
 			state.loading = false;
 			state.error = action.payload;
@@ -47,7 +52,7 @@ export const authSlice = createSlice({
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, setUser } = authSlice.actions;
 
 export const authWithGoogle = () => async (dispatch: AppDispatch) => {
 	try {
@@ -71,7 +76,7 @@ export const getUser = () => (dispatch: AppDispatch) => {
 	const userData = sessionStorage.getItem("user");
 	const user = userData ? JSON.parse(userData) : null;
 
-	dispatch(loginSuccess(user));
+	dispatch(setUser(user));
 
 	return user;
 };

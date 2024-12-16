@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query, where, doc, getDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs, orderBy, query, where, doc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 import { db } from "@/app/firebase/firebaseConfig";
 import {Comment} from "@/app/interfaces/Comment/Comment";
 import {getUser} from "@/app/services/users/UserApi";
@@ -77,6 +77,30 @@ export const getCommentsByBlogID = async (blogId: string) => {
     } catch (error) {
         console.error(error);
         return [];
+    }
+}
+
+export const getCommentByBlogIDLivestream = (blogId: string, callback: (comments: Comment[]) => void) => {
+    try {
+        const blogCollection = query(
+            collection(db, "comments"),
+            where("blogId", "==", blogId),
+            where("belongsToCommentUid", "==", null),
+            where("deletedAt", "==", null),
+            orderBy("createdAt", "desc")
+        );
+
+        onSnapshot(blogCollection, async (snapshot) => {
+            const comments = snapshot.docs.map(async (doc) => {
+                const user = await getUser(doc.data().userId);
+                return mapCommentData(doc, user);
+            });
+
+            callback(await Promise.all(comments));
+        });
+
+    } catch (error) {
+        console.error(error);
     }
 }
 

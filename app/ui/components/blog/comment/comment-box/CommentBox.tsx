@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { SpaceMono } from '@/app/ui/fonts/fonts';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import Comment from '@/app/ui/components/blog/comment/Comment';
-import { createComment, getCommentsByBlogID } from '@/app/services/comment/CommentApi';
+import {createComment, getCommentsByBlogID, getCommentByBlogIDLivestream} from '@/app/services/comment/CommentApi';
 import { Comment as CommentInterface } from '@/app/interfaces/Comment/Comment';
 import {useAppSelector} from '@/app/store/store';
 import { Toast } from 'primereact/toast';
@@ -24,18 +24,16 @@ const CommentBox = ({ blogId }: CommentBoxProps) => {
 
     const { user } = useAppSelector((state) => state.auth);
 
+    setInterval(() => {
+        getCommentByBlogIDLivestream(blogId, (liveComments) => {
+            setComments(liveComments);
+        });
+    }, 10000);
+
     useEffect(() => {
-        if (!blogId) {
-            return;
-        }
-
-        const getComments = async () => {
-            const res = await getCommentsByBlogID(blogId);
-
-            setComments(res);
-        }
-
-        getComments();
+        getCommentsByBlogID(blogId).then((comments) => {
+            setComments(comments);
+        });
     }, [blogId]);
 
     const handleComment = async () => {
@@ -85,7 +83,7 @@ const CommentBox = ({ blogId }: CommentBoxProps) => {
         newComment.userImage = user.photoURL || null;
         newComment.userName = user.displayName || null;
 
-        setComments((comments) => [...comments, newComment]);
+        setComments((comments) => [newComment, ...comments]);
 
         (document.getElementById('new-comment') as HTMLInputElement).value = '';
 

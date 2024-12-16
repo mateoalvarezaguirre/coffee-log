@@ -228,7 +228,7 @@ const Comment = ({ comment, replyEnabled, removeComment }: CommentProps) => {
                 return;
             }
     
-            const editCommentTextArea = document.getElementById('edit-comment') as HTMLTextAreaElement;
+            const editCommentTextArea = document.getElementById('edit-comment-' + comment.uid) as HTMLTextAreaElement;
     
             if (!editCommentTextArea.value) {
                 toast.current?.show({
@@ -334,7 +334,7 @@ const Comment = ({ comment, replyEnabled, removeComment }: CommentProps) => {
                     </div>
                 ) : (
                     <textarea
-                        id='edit-comment'
+                        id={`edit-comment-${comment.uid}`}
                         ref={textareaRef}
                         className='w-full bg-transparent text-foreground mt-3 p-2 px-4 rounded-3xl border border-foreground outline-none placeholder-gray-500 resize-none overflow-hidden'
                         defaultValue={comment.content}

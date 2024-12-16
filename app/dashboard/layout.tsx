@@ -1,17 +1,17 @@
 'use client';
 
 import SideNav from '@/app/ui/components/dashboard/sidenav';
-import {useAppSelector} from "@/app/store/store";
 import {redirect} from "next/navigation";
 import {isAdminUser} from "@/app/services/users/ScopeChecker";
+import { useAuth } from '../context/AuthContext';
 
 export const experimental_ppr = true;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
-    const { user } = useAppSelector((state) => state.auth);
+    const { auth } = useAuth();
 
-    if (!user || !isAdminUser(user)) {
+    if (!auth || !isAdminUser(auth)) {
         redirect('/');
     }
 

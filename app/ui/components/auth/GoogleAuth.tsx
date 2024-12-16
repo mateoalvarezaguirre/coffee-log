@@ -1,15 +1,27 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '@/app/store/store';
-import { authWithGoogle } from '@/app/store/slices/auth/authSlice';
+import { useAuth } from '@/app/context/AuthContext';
 
 const GoogleAuth: React.FC = () => {
 
+    const {loginWithGoogle, loading, auth } = useAuth();
+
+    const { error } = useAppSelector((state: RootState) => state.auth);
+
     const dispatch = useAppDispatch();
-    const { loading, error } = useAppSelector((state: RootState) => state.auth);
 
     const handleGoogleLogin = async () => {
-        await dispatch(authWithGoogle());
+        loginWithGoogle();
     };
+
+    useEffect(() => {
+        if (auth) {
+            dispatch({ type: 'auth/loginSuccess', payload: auth });
+        }
+    }, [auth, dispatch])
+    
 
     return (
         <div className="w-full max-w-md p-8 space-y-8 rounded-lg shadow-md bg-foreground">
