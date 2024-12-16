@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from "@/app/store/store";
-import Image from "next/image";
 import {PowerIcon, UserCircleIcon} from "@heroicons/react/24/outline";
 import {logout} from "@/app/store/slices/auth/authSlice";
 import {redirect} from "next/navigation";
@@ -31,12 +30,15 @@ const ProfileBox: React.FC = () => {
     return (
         <div className={`relative`}>
             <div onClick={toggleProfile}>
-                <Image
+                <div
                     className={`rounded-full cursor-pointer`}
-                    src={user.photoURL ?? '/profile.webp'}
-                    alt="profile"
-                    width={50}
-                    height={50}
+                    style={{
+                        background: `url(${user.photoURL ?? '/profile.webp'})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        width: '50px',
+                        height: '50px'
+                    }}
                 />
             </div>
             <div

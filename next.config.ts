@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        hostname: '*.googleusercontent.com',
         port: '',
         pathname: '**',
       },
@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
         hostname: 'firebasestorage.googleapis.com',
         port: '',
         pathname: '**',
-      }
+      },
     ],
   },  
 };
